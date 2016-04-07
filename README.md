@@ -19,3 +19,11 @@ To use all utilities included in this tool, you need the following installed:
    - When entering the full path, do not backslash-escape spaces:
    - `/mnt/hgfs/Mint\ Shared/mem_capt.mem` <-- NO
    - `/mnt/hgfs/Mint Shared/mem_capt.mem` <-- YES 
+
+## Working Components
+   - ~~Disk~~
+   - Memory
+   - ~~Network~~
+   - ~~Picvideo~~
+   - ~~Archive~~
+   - ~~Unknown~~
