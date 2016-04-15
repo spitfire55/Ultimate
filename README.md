@@ -1,4 +1,6 @@
 #Ultimate
+This tool will be developed in my free time to handle forensics-related challenges that occur repeatedly in CTFs and wargames. Such examples of repetitive challenges include recursive compression, file header repairs, LSB Stego, hidden files, and much more. 
+
 
 ## Installation
    - Download ZIP
