@@ -1,3 +1,7 @@
+import subprocess
+import sys
+import os
+
 ''' The following tools are used:
 - Sleuthkit
 - binwalk
@@ -7,7 +11,7 @@ class Disk():
     def __init__(self, filename):
         print "Hello, I am disk"
         self.filename = filename
-        self.diskType = self.identifyFileType()
+        self.diskType = self.setFileType()
                 
         print "The first tool we will use is binwalk\n"
         self.runBinWalk()
@@ -24,7 +28,7 @@ class Disk():
         print "6) NTFS disk image"
         print "7) HFS disk image"
         print "8) Unknown"
-        print "9) QUIT
+        print "9) QUIT"
         types = {1: "raw", 2: "ext2", 3: "ext3", 4: "ext4", 5 : "fat32", 6: "ntfs", 7: "hfs", 8: "unknown" }
         t = raw_input("")
         try:
@@ -34,6 +38,8 @@ class Disk():
             elif t == 8:
                 print "Ok, let me figure it out for you..."
                 self.identifyFileType()
+                print "\n\n\n"
+                self.setFileType()
             elif t == 9:
                 sys.exit(0)
             else:
@@ -42,5 +48,11 @@ class Disk():
         except ValueError:
             print "Not a valid option. Please try again."
             self.setFileType()
+    def identifyFileType(self):
+        subprocess.call(["fdisk", "-l", self.filename])
+        return 0
+        
+        
+  
             
         

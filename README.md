@@ -11,11 +11,14 @@ This tool will be developed in my free time to handle forensics-related challeng
 
 ## Dependencies
 To use all utilities included in this tool, you need the following installed:
+NOTE: Tested with apt-get/yum packages unless otherwise specified
+   - Volatility
    - Yara --> Install from here (http://yara.readthedocs.org/en/latest/gettingstarted.html#compiling-and-installing-yara), not through apt or pip.
    - autoconf
    - automake
    - libtool
-   -
+   - sleuthkit
+   - 
 
 ## Notes
    - When entering the full path, do not backslash-escape spaces:

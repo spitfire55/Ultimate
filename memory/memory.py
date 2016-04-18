@@ -331,10 +331,12 @@ class Memory():
         subprocess.call(["python", "./memory/volatility/vol.py", "-f", self.filename, "imageinfo"])
         print "\n\n\n"
         while True:
-            i = raw_input("Based on the results above, what is the OS format? ")
+            i = raw_input("Based on the results above, what is the OS format? Or, type 'quit'...")
             if i in profiles:
                 self.profile = i
                 break
+            elif i == "quit":
+                sys.exit(0)
             else:
                 print "Invalid format. Try again..."
                 continue
