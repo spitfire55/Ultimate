@@ -14,7 +14,8 @@ class Disk():
         self.diskType = self.setFileType()
                 
         print "The first tool we will use is binwalk\n"
-        self.runBinWalk()
+        self.runBinwalk()
+        sys.exit(0)
         print "Now we will use Sleuthkit\n"
         self.runSleuthkit()
         
@@ -50,15 +51,46 @@ class Disk():
             self.setFileType()
     def identifyFileType(self):
         subprocess.call(["fdisk", "-l", self.filename])
-        return 0
         
     def runBinwalk(self):
-        print "Running Binwalk on file to show contents of disk\n"
-        subprocess.call(["binwalk", self.filename])
-        return 0
+        print "Running Binwalk on file to show contents of disk (this may take a while...)\n"
+        o = subprocess.check_output(["binwalk", self.filename])
+        print o
+        self.saveOutput("binwalk", o)
     def runSleuthkit(self):
         return 0
-        
+    
+    def saveOutput(self, utility, output):
+        #Takes in which utility wants to print so it can
+        #name output file correctly, along with original output
+        outFileName = "%s_out" % utility
+        save_Option = raw_input("\nWould you like to save this output to a seperate file? (Y/n) ")
+        if save_Option == "" or save_Option == "Y" or save_Option == "y":
+            if os.path.isfile(outFileName):
+                over_Option = raw_input("%s file already exists. Do you wish to overwrite? (y/N) " % outFileName)
+                if(over_Option == "" or over_Option == "n" or over_Option == "N"):
+                    newFileName = raw_input("Enter the name of the file you wish to write to: ")
+                    out = open(newFileName, "wb")
+                    out.write(output)
+                    print "Output saved to %s" % newFileName
+                    return 0
+                elif over_Option == "y" or over_Option == "Y":
+                    os.remove(outFileName)
+                    out = open(outFileName, "wb")
+                    out.write(output)
+                    print "Overwrote binwalk_out file w/ new content"
+                else:
+                    print "Invalid option...try again"
+                    self.saveOutput(utility)
+            else:
+                out = open(outFileName, "wb")
+                out.write(output)
+                print "Output saved in %s file" % outFileName
+        elif save_Option == "n" or save_Option == "N":
+            pass
+        else:
+            print "Invalid option. Please type y or n."
+            self.saveOutput(utility)
   
             
         

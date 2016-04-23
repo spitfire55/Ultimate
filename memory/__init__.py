@@ -1,1 +1,1 @@
-__all__=['memory', 'volatility']
+__all__=['memory']

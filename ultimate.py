@@ -63,3 +63,5 @@ elif i_opt == 5:
     picvideo.Picvideo(filename)
 else:
     unknown.Unknown(filename)
+print "\n\nHave a nice day!\n\n"
+sys.exit(0)
