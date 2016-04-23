@@ -52,6 +52,12 @@ class Disk():
         subprocess.call(["fdisk", "-l", self.filename])
         return 0
         
+    def runBinwalk(self):
+        print "Running Binwalk on file to show contents of disk\n"
+        subprocess.call(["binwalk", self.filename])
+        return 0
+    def runSleuthkit(self):
+        return 0
         
   
             
