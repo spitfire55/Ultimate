@@ -340,11 +340,18 @@ class Memory():
             else:
                 print "Invalid format. Try again..."
                 continue
+    def flatten_list(iterable):
+    	for i in iterable:
+    		if hasattr(i, '__iter__'):
+    			for subi in flatten_list(i):
+    				yield subi
+    		else:
+    			yield i
 
     def memOptions(self):
         while True:
             print "Choose one of the following options:"
-            print "1) Specify plugin by name"
+            print "1) Specify plugin by name and arguments"
             print "2) Show plugins (brief)"
             print "3) Show plugins (full)"
             print "4) Quit"
@@ -358,7 +365,7 @@ class Memory():
                         print "\n%s\n" % self.plugList
                         continue
                     elif opt == 3:
-                        subprocess.call(["python", "./memory/volatility/vol.py", "--info"])
+                        print "\n%s" % plugins 
                         print "\n\n"
                     else:
                         sys.exit(0)
@@ -367,10 +374,10 @@ class Memory():
                 continue
         self.runPlugin()
     def runPlugin(self):
-        plugin = raw_input("Enter the name of the plugin you wish to use: ")
-        if plugin in self.plugList:
+        plugin = raw_input("Enter the name of the plugin you wish to use along with any options required.\nIf unsure, just type <plugin_name> -h\n\nPlugin:  ")
+        if plugin.split(" ")[0] in self.plugList:
             proArg = "--profile={}".format(self.profile)
-            p = subprocess.call(["python", "./memory/volatility/vol.py", "-f", self.filename, proArg, plugin])
+            p = subprocess.call(list(flatten_list(["volatility", "-f", self.filename, proArg, plugin.split(" ")])))
             while True:
                 out = raw_input("\nWould you like to save this output into a file? [N/y]")
                 if(out == "y" or out == "Y"):

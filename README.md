@@ -32,3 +32,8 @@ NOTE: Tested with apt-get/yum packages unless otherwise specified
    - ~~Picvideo~~
    - ~~Archive~~
    - ~~Unknown~~
+
+## To Do
+   - Make environmental variables for profile and file for Volatility
+   - Create tool_dependencies.sh file that will auto-install all dependencies (assuming up-to-date Ubuntu 15.04 OS)
+   - Incorporate registry hive extraction into memory toolset
