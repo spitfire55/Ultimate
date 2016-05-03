@@ -1,7 +1,15 @@
+import os
 
+class Utils:
+	
+	def flatten_list(iterable):
+	    	for i in iterable:
+	    		if hasattr(i, '__iter__'):
+	    			for subi in flatten_list(i):
+	    				yield subi
+	    		else:
+	    			yield i
 
-class Utils():
+	a = ['hacked', 'the', ['main', 'frame', 123]]
+	print list(flatten_list(a))
 
-    def filechooser():
-        f = open(raw_input("Please enter the full path of the file you wish to analyze: "), "rb")
-        return f
